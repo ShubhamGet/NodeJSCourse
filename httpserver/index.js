@@ -1,5 +1,6 @@
 // create own server
 const http=require("http");
+const fs=require("fs");
 //const { url } = require("inspector");
  const server=http.createServer((req,res)=>{
     //console.log(req,url)
@@ -10,6 +11,13 @@ const http=require("http");
     }
     else if(req.url=='/contact'){
         res.end('Hello from contact side');
+    }
+    else if(req.url=='/userapi'){
+        fs.readFile(`${__dirname}/userAPI/userAPI.json`,"utf-8",(err,data)=>{
+           console.log(data)
+           //res.end('Hello from API User side');
+           res.end(data)
+        })
     }
     else{
         res.writeHead(404,{"content-type":"text/html"})
